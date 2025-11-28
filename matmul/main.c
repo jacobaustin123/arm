@@ -324,13 +324,13 @@ int main() {
     printf("  Accel speedup vs NEON:    %.2fx\n", neon_time / accel_time);
     printf("\n");
 
-    if (matrices_equal(hugeC_scalar, hugeC_neon, N2, 0.01f)) {
+    if (matrices_equal(hugeC_scalar, hugeC_neon, N2, 0.001f)) {
         printf("✓ Results match (NEON)!\n\n");
     } else {
         printf("✗ Results differ (NEON)!\n\n");
     }
     
-    if (matrices_equal(hugeC_scalar, hugeC_accel, N2, 0.01f)) {
+    if (matrices_equal(hugeC_scalar, hugeC_accel, N2, 0.001f)) {
         printf("✓ Results match (Accel)!\n\n");
     } else {
         printf("✗ Results differ (Accell)!\n\n");
