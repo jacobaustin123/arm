@@ -1,28 +1,29 @@
-# ARM64 NEON Experiments
+# ARM64 NEON SIMD Vector Addition
 
-Experiments with ARM64 NEON SIMD instructions on Apple Silicon.
-
-## Projects
-
-### [simd/](simd/)
-Vector addition benchmark comparing hand-written NEON assembly to scalar C code.
-
-### [matmul/](matmul/)
-Matrix multiplication benchmark comparing scalar, hand-written NEON, and Apple Accelerate implementations.
-
-## Requirements
-
-- macOS with Apple Silicon (M1/M2/M3)
-- Xcode command line tools
+A benchmark comparing SIMD vs scalar float array addition on Apple Silicon.
 
 ## Building
 
-Each project has its own Makefile:
+```bash
+make
+```
+
+Requires macOS with Apple Silicon (or ARM64) and Xcode command line tools.
+
+## Running
 
 ```bash
-cd simd && make
-cd matmul && make
+./simd_test
 ```
+
+Tests correctness with a 512-element array and benchmarks with 10 million floats.
+
+## Implementation Details
+
+The NEON kernel (`simd_add.s`) adds two float arrays using:
+- `ld1` to load 4 floats at a time into vector registers
+- `fadd` for parallel floating-point addition
+- Scalar fallback for remaining elements (count not divisible by 4)
 
 ## License
 
